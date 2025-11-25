@@ -59,10 +59,10 @@ fun RtspPlayerScreen() {
     }
     var lastRequestedUrl by rememberSaveable { mutableStateOf(defaultStream) }
 
-    val player = remember { ExoPlayer.Builder(context).build() }
+    val exoPlayer = remember { ExoPlayer.Builder(context).build() }
 
     DisposableEffect(Unit) {
-        onDispose { player.release() }
+        onDispose { exoPlayer.release() }
     }
 
     LaunchedEffect(lastRequestedUrl) {
@@ -70,9 +70,9 @@ fun RtspPlayerScreen() {
             .setUri(lastRequestedUrl)
             .setMimeType(MimeTypes.APPLICATION_RTSP)
             .build()
-        player.setMediaItem(mediaItem)
-        player.prepare()
-        player.playWhenReady = true
+        exoPlayer.setMediaItem(mediaItem)
+        exoPlayer.prepare()
+        exoPlayer.playWhenReady = true
     }
 
     Scaffold(
@@ -108,12 +108,12 @@ fun RtspPlayerScreen() {
                     .weight(1f),
                 factory = { ctx ->
                     PlayerView(ctx).apply {
-                        player = this@RtspPlayerScreen.player
+                        player = exoPlayer
                     }
                 },
                 update = { view ->
-                    if (view.player !== player) {
-                        view.player = player
+                    if (view.player !== exoPlayer) {
+                        view.player = exoPlayer
                     }
                 }
             )
