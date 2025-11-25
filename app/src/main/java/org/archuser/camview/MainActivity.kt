@@ -7,9 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.weight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun RtspPlayerScreen() {
     val context = LocalContext.current
+    @Suppress("SpellCheckingInspection")
     val defaultStream = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
     var streamUrl by rememberSaveable(stateSaver = TextFieldValue.Saver) {
         mutableStateOf(TextFieldValue(defaultStream))
@@ -105,7 +106,7 @@ fun RtspPlayerScreen() {
             AndroidView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f),
+                    .fillMaxHeight(),
                 factory = { ctx ->
                     PlayerView(ctx).apply {
                         player = exoPlayer
