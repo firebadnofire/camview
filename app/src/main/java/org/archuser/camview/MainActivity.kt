@@ -88,12 +88,20 @@ private fun CamviewScreen() {
             Text(text = "Play")
         }
         Spacer(modifier = Modifier.height(16.dp))
-        VideoPlayer(url = playbackUrl)
+        VideoPlayer(
+            url = playbackUrl,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        )
     }
 }
 
 @Composable
-private fun VideoPlayer(url: String?) {
+private fun VideoPlayer(
+    url: String?,
+    modifier: Modifier = Modifier
+) {
     val targetUrl = remember(url) { url }
 
     AndroidView(
@@ -108,9 +116,7 @@ private fun VideoPlayer(url: String?) {
                 })
             }
         },
-        modifier = Modifier
-            .fillMaxWidth()
-            .weight(1f),
+        modifier = modifier,
         update = { videoView ->
             if (targetUrl.isNullOrBlank()) {
                 videoView.stopPlayback()
