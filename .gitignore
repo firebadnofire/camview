@@ -27,6 +27,9 @@ local.properties
 .idea/vcs.xml
 *.iml
 
+# Android SDK (installed by scripts/install-android-sdk.sh)
+android-sdk/
+
 # OS-specific files
 .DS_Store
 .DS_Store?
